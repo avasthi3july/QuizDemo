@@ -49,7 +49,9 @@ public class MainActivity extends AppCompatActivity
     TextView ques;
     @BindView(R.id.btnNext)
     TextView btnNext;
-    int i = 0;
+    @BindView(R.id.num)
+    TextView num;
+    int i = 0, quesNum = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +117,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main2, menu);
-        return true;
+        return false;
     }
 
     @Override
@@ -182,6 +184,7 @@ public class MainActivity extends AppCompatActivity
             userName.setText(name);
             userEmail.setText(email);
             mQuestions.addAll(baseData.getResults());
+            num.setText("Q : 1 ");
             ques.setText(mQuestions.get(0).getQuestion());
         } else Util.showToast(this, baseData.getMessage());
 
@@ -201,11 +204,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         i = ++i;
+        quesNum = ++quesNum;
         if (mQuestions != null && i < mQuestions.size()) {
-
-            System.out.println("SIZEE>>"+i+"ATTAYY>>"+mQuestions.size());
+            num.setText("Q : " + quesNum + " ");
             ques.setText(mQuestions.get(i).getQuestion());
-        }
+        } else Util.showToast(this, "No More Question");
 
     }
 }
