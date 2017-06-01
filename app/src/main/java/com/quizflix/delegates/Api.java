@@ -24,20 +24,19 @@ import retrofit.mime.TypedInput;
  */
 public interface Api {
 
-    int ADD_IMAGE = 10001;
-    int GET_LIST_DATA = 10002;
-    int ADD_USER_REGISTRATION = 10003;
-    int GET_IMAGE = 10004;
-    int GET_USER_EXIST = 10005;
-    int SEND_SMS = 10006;
+    int ADD_USER_REGISTRATION = 10001;
 
     @Headers("Content-Type: application/json")
-    @POST("/Login")
+    @POST("/account/Login")
     void userLogin(@Body TypedInput inmap, Callback<String> callback);
 
     @Headers("Content-Type: application/json")
-    @POST("/Registeration")
+    @POST("/account/Registeration")
     void userRegistreation(@Body TypedInput inmap, Callback<String> callback);
+
+    @Headers("Content-Type: application/json")
+    @POST("/User/GetQuestionData")
+    void getQList(@Body TypedInput inmap, Callback<String> callback);
 
     @FormUrlEncoded
     @POST("/api.php")

@@ -5,7 +5,7 @@ package com.quizflix.delegates;
  */
 public class ServerApi {
     //public static String BASE_URL = "http://www.synapse.asia/photo9070";
-   public static String BASE_URL = "http://webapi.quizflix.co.uk/api/account";
+   public static String BASE_URL = "http://webapi.quizflix.co.uk/api";
 }
 
 

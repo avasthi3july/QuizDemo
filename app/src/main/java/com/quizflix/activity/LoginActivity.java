@@ -2,6 +2,7 @@ package com.quizflix.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -42,13 +43,14 @@ public class LoginActivity extends AppCompatActivity implements ServiceCallBack 
     Button _loginButton;
     @BindView(R.id.link_signup)
     TextView _signupLink;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        mSharedPreferences = Util.getSharedPreferences(this);
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -78,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements ServiceCallBack 
             return;
         }
 
-       // _loginButton.setEnabled(false);
+        // _loginButton.setEnabled(false);
 
        /* final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme);
@@ -173,14 +175,18 @@ public class LoginActivity extends AppCompatActivity implements ServiceCallBack 
     public void onSuccess(int tag, String baseResponse) {
         BaseResponse baseData = JsonDataParser.getInternalParser(baseResponse, new TypeToken<BaseResponse>() {
         }.getType());
-        if(baseData.getSuccess())
-        {
+        if (baseData.getSuccess()) {
+            SharedPreferences.Editor edit = mSharedPreferences.edit();
+            edit.putString("id", baseData.getResult().getId());
+            edit.putString("name", baseData.getResult().getFirstName());
+            edit.putString("email", baseData.getResult().getEmailId());
+            edit.putBoolean("isLogin", true);
+            edit.commit();
             Util.showToast(this, baseData.getMessage());
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             finish();
-        }
-        else Util.showToast(this, baseData.getMessage());
+        } else Util.showToast(this, baseData.getMessage());
     }
 
     @Override

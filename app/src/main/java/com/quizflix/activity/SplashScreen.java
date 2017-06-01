@@ -2,14 +2,13 @@ package com.quizflix.activity;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.quizflix.R;
+import com.quizflix.Util.Util;
 
 
 /**
@@ -20,12 +19,14 @@ public class SplashScreen extends Activity {
     private static int SPLASH_TIME_OUT = 3000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private String regid = "";
-    private SharedPreferences pref;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+        mSharedPreferences = Util.getSharedPreferences(this);
+        final boolean isLogIn = mSharedPreferences.getBoolean("isLogin", false);
         new Handler().postDelayed(new Runnable() {
 
             /*
@@ -37,8 +38,15 @@ public class SplashScreen extends Activity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent i = new Intent(SplashScreen.this, LoginActivity.class);
-                startActivity(i);
+                if(isLogIn)
+                {
+                    Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                    startActivity(i);
+                }
+                else {
+                    Intent i = new Intent(SplashScreen.this, LoginActivity.class);
+                    startActivity(i);
+                }
 
                 // close this activity
                 finish();
