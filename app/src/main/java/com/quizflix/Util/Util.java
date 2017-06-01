@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -168,7 +169,11 @@ public class Util {
             return null;
         }
     }*/
+    public static SharedPreferences getSharedPreferences(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("mypref", 0);
+        return sharedPreferences;
 
+    }
     public static boolean isNetworkConnected(Context mContext) {
         ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 
