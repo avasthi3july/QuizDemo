@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -57,7 +59,9 @@ public class SignupActivity extends AppCompatActivity implements ServiceCallBack
                 signup();
             }
         });
-
+        SpannableString content = new SpannableString("Already a member? Login");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        _loginLink.setText(content);
         _loginLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
