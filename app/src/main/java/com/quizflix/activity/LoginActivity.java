@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +60,9 @@ public class LoginActivity extends AppCompatActivity implements ServiceCallBack 
                 login();
             }
         });
-
+        SpannableString content = new SpannableString("No account yet? Sign up");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        _signupLink.setText(content);
         _signupLink.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -97,7 +97,7 @@
             android:background="@color/primary"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:text="Create Account"/>
+            android:text="Sign up"/>
 
         <TextView android:id="@+id/link_login"
             android:layout_width="fill_parent"
