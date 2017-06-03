@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import com.quizflix.R;
+import com.quizflix.adapter.QuestionAdapter;
 import com.quizflix.dao.Data;
 
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ import java.util.List;
 
 public class FlipActivity extends AppCompatActivity {
 
-    public static MyAppAdapter myAppAdapter;
-    public static ViewHolder viewHolder;
+    public  QuestionAdapter myAppAdapter;
+    //public  ViewHolder viewHolder;
     private ArrayList<Data> array;
     private SwipeFlingAdapterView flingContainer;
 
@@ -49,7 +50,7 @@ public class FlipActivity extends AppCompatActivity {
         array.add(new Data("http://www.androidtutorialpoint.com/wp-content/uploads/2016/11/Aishwarya-Rai.jpg", "Hi I am Aishwarya Rai. Wanna chat with me ? \n" +
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."));
 
-        myAppAdapter = new MyAppAdapter(array, FlipActivity.this);
+        myAppAdapter = new QuestionAdapter(array, FlipActivity.this);
         flingContainer.setAdapter(myAppAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -104,15 +105,15 @@ public class FlipActivity extends AppCompatActivity {
         });
     }
 
-    public static class ViewHolder {
+  /*  public static class ViewHolder {
         public static FrameLayout background;
         public TextView DataText;
         public ImageView cardImage;
 
 
-    }
+    }*/
 
-    public class MyAppAdapter extends BaseAdapter {
+  /*  public class MyAppAdapter extends BaseAdapter {
 
 
         public List<Data> parkingList;
@@ -164,5 +165,5 @@ public class FlipActivity extends AppCompatActivity {
 
             return rowView;
         }
-    }
+    }*/
 }
