@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.quizflix.R;
-import com.quizflix.activity.FlipActivity;
 import com.quizflix.dao.Data;
 import com.quizflix.dao.Question;
 
@@ -21,13 +20,13 @@ import java.util.List;
  * Created by kavasthi on 6/3/2017.
  */
 
-public class QuestionAdapter extends BaseAdapter {
+public class FlipAdapter extends BaseAdapter {
 
 
-    public List<Question> parkingList;
+    public List<Data> parkingList;
     public Context context;
     public static ViewHolder viewHolder;
-    public QuestionAdapter(List<Question> apps, Context context) {
+    public FlipAdapter(List<Data> apps, Context context) {
         this.parkingList = apps;
         this.context = context;
     }
@@ -68,9 +67,9 @@ public class QuestionAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.DataText.setText(parkingList.get(position).getQuestion() + "");
+        viewHolder.DataText.setText(parkingList.get(position).getDescription() + "");
 
-        //Glide.with(context).load(parkingList.get(position).getImagePath()).into(viewHolder.cardImage);
+        Glide.with(context).load(parkingList.get(position).getImagePath()).into(viewHolder.cardImage);
 
         return rowView;
     }
