@@ -42,7 +42,7 @@ public class QuizView extends Fragment implements ServiceCallBack {
     @BindView(R.id.frame)
     SwipeFlingAdapterView flingContainer;
     private SharedPreferences mSharedPreferences;
-    private String id, name, email;
+    private String id;
     private TextView userName, userEmail, question;
     private RecyclerView mRecyclerView;
     private ArrayList<Question> mQuestions;
@@ -82,8 +82,6 @@ public class QuizView extends Fragment implements ServiceCallBack {
         mpWorng = MediaPlayer.create(getActivity(), R.raw.newmsg);
         mSharedPreferences = Util.getSharedPreferences(getActivity());
         id = mSharedPreferences.getString("id", null);
-        email = mSharedPreferences.getString("email", null);
-        name = mSharedPreferences.getString("name", null);
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("Index", "1");

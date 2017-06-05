@@ -51,48 +51,32 @@ import retrofit.mime.TypedByteArray;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, ServiceCallBack, View.OnClickListener {
     private SharedPreferences mSharedPreferences;
-   // private String id, name, email;
-    private TextView userName, userEmail, question;
-    private RecyclerView mRecyclerView;
-    private ArrayList<Question> mQuestions;
-    //MediaPlayer mpRight, mpWorng;
-    /*@BindView(R.id.ques)
-    TextView ques;
-    @BindView(R.id.btnNext)
-    TextView btnNext;
-    @BindView(R.id.num)
-    TextView num;*/
-   /* @BindView(R.id.timer)
-    TextView timer;*/
-    int i = 0, quesNum = 1, trueClick = 0, falseClick = 0;
-    public QuestionAdapter myAppAdapter;
-    //private ArrayList<Data> array;
-    //private SwipeFlingAdapterView flingContainer;
-
-    /*@Override
-    protected int getView() {
-        return R.layout.activity_main2;
-    }*/
+    private TextView userName, userEmail;
+    private String nameUser, emailUser;
+    @BindView(R.id.name)
+    TextView name;
+    @BindView(R.id.input_email)
+    TextView inputEmail;
 
     @Override
     protected int getView() {
-        return  R.layout.activity_main2;
+        return R.layout.activity_main2;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ButterKnife.bind(this);
         initViews();
     }
 
     private void initViews() {
         mSharedPreferences = Util.getSharedPreferences(this);
+        emailUser = mSharedPreferences.getString("email", null);
+        nameUser = mSharedPreferences.getString("name", null);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         // getSupportActionBar().setCustomView(R.layout.header_view);
-        mQuestions = new ArrayList<>();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,10 +96,13 @@ public class MainActivity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
-        userName = (TextView) header.findViewById(R.id.name);
-        userEmail = (TextView) header.findViewById(R.id.input_email);
-        QuizView mQuizView=new QuizView();
-        replaceFragment(R.id.contenair,mQuizView,mQuizView.getClass().getName(), mQuizView.getClass().getName());
+        ButterKnife.bind(this,header);
+        name.setText(nameUser);
+        inputEmail.setText(emailUser);
+        // userName = (TextView) header.findViewById(R.id.name);
+        //userEmail = (TextView) header.findViewById(R.id.input_email);
+        QuizView mQuizView = new QuizView();
+        replaceFragment(R.id.contenair, mQuizView, mQuizView.getClass().getName(), mQuizView.getClass().getName());
     }
 
     @Override
@@ -173,7 +160,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onSuccess(int tag, String baseResponse) {
-       }
+    }
 
     @Override
     public void onFail(RetrofitError error) {
@@ -184,6 +171,7 @@ public class MainActivity extends BaseActivity
     public void onNoNetwork() {
 
     }
+
     @Override
     public void onClick(View v) {/*
         i = ++i;
