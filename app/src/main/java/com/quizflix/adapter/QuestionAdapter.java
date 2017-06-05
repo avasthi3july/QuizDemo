@@ -62,7 +62,7 @@ public class QuestionAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             viewHolder.DataText = (TextView) rowView.findViewById(R.id.bookText);
             viewHolder.background = (FrameLayout) rowView.findViewById(R.id.background);
-            viewHolder.cardImage = (ImageView) rowView.findViewById(R.id.cardImage);
+            //viewHolder.cardImage = (ImageView) rowView.findViewById(R.id.cardImage);
             rowView.setTag(viewHolder);
 
         } else {

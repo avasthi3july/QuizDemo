@@ -14,7 +14,7 @@ public class Question {
     @SerializedName("Explanation")
     private String explanation;
     @SerializedName("Answer")
-    private String answer;
+    private boolean answer;
     @SerializedName("IsActive")
     private String isActive;
 
@@ -42,11 +42,11 @@ public class Question {
         this.explanation = explanation;
     }
 
-    public String getAnswer() {
+    public boolean getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(boolean answer) {
         this.answer = answer;
     }
 

@@ -150,6 +150,7 @@ public class FlipActivity extends AppCompatActivity implements ServiceCallBack {
         System.out.println("SIZEE>>>>>>>" + array.size());
         myAppAdapter = new FlipAdapter(array, FlipActivity.this);
         flingContainer.setAdapter(myAppAdapter);
+
     }
 
     @Override

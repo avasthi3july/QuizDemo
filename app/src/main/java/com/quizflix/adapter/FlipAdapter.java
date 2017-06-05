@@ -61,7 +61,7 @@ public class FlipAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             viewHolder.DataText = (TextView) rowView.findViewById(R.id.bookText);
             viewHolder.background = (FrameLayout) rowView.findViewById(R.id.background);
-            viewHolder.cardImage = (ImageView) rowView.findViewById(R.id.cardImage);
+            //viewHolder.cardImage = (ImageView) rowView.findViewById(R.id.cardImage);
             rowView.setTag(viewHolder);
 
         } else {
@@ -69,7 +69,7 @@ public class FlipAdapter extends BaseAdapter {
         }
         viewHolder.DataText.setText(parkingList.get(position).getDescription() + "");
 
-        Glide.with(context).load(parkingList.get(position).getImagePath()).into(viewHolder.cardImage);
+        //Glide.with(context).load(parkingList.get(position).getImagePath()).into(viewHolder.cardImage);
 
         return rowView;
     }
@@ -77,7 +77,7 @@ public class FlipAdapter extends BaseAdapter {
     public static class ViewHolder {
         public static FrameLayout background;
         public TextView DataText;
-        public ImageView cardImage;
+        //public ImageView cardImage;
 
 
     }
