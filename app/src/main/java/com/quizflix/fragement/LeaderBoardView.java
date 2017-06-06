@@ -50,7 +50,7 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
         initViews(view);
     }
 
-    public void userRegistration(JSONObject jsonObject) {
+    public void getUserList() {
         BaseRequest baseRequest = new BaseRequest(getActivity());
         baseRequest.setProgressShow(true);
         baseRequest.setRequestTag(Api.ADD_USER_REGISTRATION);
@@ -58,7 +58,7 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
         baseRequest.setServiceCallBack(this);
         Api api = (Api) baseRequest.execute(Api.class);
         try {
-            TypedByteArray input = new TypedByteArray("application/json", jsonObject.toString().getBytes("UTF-8"));
+            //TypedByteArray input = new TypedByteArray("application/json", jsonObject.toString().getBytes("UTF-8"));
             api.getUserQList(baseRequest.requestCallback());
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,7 +68,7 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
     public void submitScore(JSONObject jsonObject) {
         BaseRequest baseRequest = new BaseRequest(getActivity());
         baseRequest.setProgressShow(true);
-        baseRequest.setRequestTag(Api.ADD_USER_REGISTRATION);
+        baseRequest.setRequestTag(Api.ADD_SCORE);
         baseRequest.setMessage("Please wait...");
         baseRequest.setServiceCallBack(this);
         Api api = (Api) baseRequest.execute(Api.class);
@@ -81,7 +81,7 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
     }
 
     private void initViews(View view) {
-
+        getUserList();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         LinearLayoutManager ll = new LinearLayoutManager(getActivity());
         ll.setOrientation(LinearLayoutManager.VERTICAL);
@@ -110,7 +110,7 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
 
     @Override
     public void onSuccess(int tag, String baseResponse) {
-        if(tag== Api.ADD_USER_REGISTRATION) {
+        if (tag == Api.ADD_USER_REGISTRATION) {
             Leader baseData = JsonDataParser.getInternalParser(baseResponse, new TypeToken<Leader>() {
             }.getType());
             userListData = new ArrayList<>();
@@ -119,8 +119,7 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
                 UserAdapter mUserAdapter = new UserAdapter(getActivity(), userListData);
                 mRecyclerView.setAdapter(mUserAdapter);
             }
-        }
-        else   if(tag== Api.ADD_SCORE) {
+        } else if (tag == Api.ADD_SCORE) {
 
         }
     }
