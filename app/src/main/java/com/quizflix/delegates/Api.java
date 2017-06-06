@@ -12,6 +12,7 @@ import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
+import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
@@ -25,6 +26,7 @@ import retrofit.mime.TypedInput;
 public interface Api {
 
     int ADD_USER_REGISTRATION = 10001;
+    int ADD_SCORE= 10002;
 
     @Headers("Content-Type: application/json")
     @POST("/account/Login")
@@ -37,6 +39,18 @@ public interface Api {
     @Headers("Content-Type: application/json")
     @POST("/User/GetQuestionData")
     void getQList(@Body TypedInput inmap, Callback<String> callback);
+
+  /*  @Headers("Content-Type: application/json")
+    @POST("/User/GetUserList")
+    void getUserQList(@Body TypedInput inmap, Callback<String> callback);*/
+
+    @Headers("Content-Type: application/json")
+    @POST("/User/InsertUserChapter")
+    void getUserInsert(@Body TypedInput inmap, Callback<String> callback);
+
+
+    @GET("/User/GetUserList")
+    void getUserQList(Callback<String> callback);
 
     @FormUrlEncoded
     @POST("/api.php")

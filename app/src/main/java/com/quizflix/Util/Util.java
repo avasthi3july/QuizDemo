@@ -13,6 +13,8 @@ import android.os.Build;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import com.quizflix.R;
+
 /**
  * Created by kavasthi on 12/12/2016.
  */
@@ -20,9 +22,29 @@ import android.widget.Toast;
 public class Util {
 
 
-
     public static void showToast(Context mContext, String meg) {
         Toast.makeText(mContext, meg, Toast.LENGTH_LONG).show();
+    }
+
+    public static void showDialog1(final Activity activity, String message) {
+        final AlertDialog.Builder alertDialog;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            alertDialog = new AlertDialog.Builder(activity, R.style.CustomDialog);
+
+        } else {
+            alertDialog = new AlertDialog.Builder(activity);
+        }
+        //final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setMessage(message);
+        alertDialog.setCancelable(false);
+        alertDialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.create();
+        alertDialog.show();
     }
 
   /*  public static void showDialog(Context context, String message) {
@@ -174,6 +196,7 @@ public class Util {
         return sharedPreferences;
 
     }
+
     public static boolean isNetworkConnected(Context mContext) {
         ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 

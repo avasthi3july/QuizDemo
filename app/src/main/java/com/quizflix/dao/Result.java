@@ -16,7 +16,17 @@ public class Result {
     private String emailId;
     @SerializedName("IsActive")
     private String isActive;
+    @SerializedName("Score")
+    private String score;
 
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
 
     public String getId() {
         return Id;

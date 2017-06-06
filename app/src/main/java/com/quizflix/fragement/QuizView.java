@@ -73,6 +73,7 @@ public class QuizView extends Fragment implements ServiceCallBack {
             }
 
             public void onFinish() {
+                totalScore();
                 timer.setText("Time Over");
                 // totalScore();
             }
@@ -109,13 +110,13 @@ public class QuizView extends Fragment implements ServiceCallBack {
 
     @Override
     public void onSuccess(int tag, String baseResponse) {
-        mQuestions=new ArrayList<>();
+        mQuestions = new ArrayList<>();
         BaseResponse baseData = JsonDataParser.getInternalParser(baseResponse, new TypeToken<BaseResponse>() {
         }.getType());
         if (baseData.getSuccess()) {
 
 //            userName.setText(name);
-           // userEmail.setText(email);
+            // userEmail.setText(email);
             mQuestions.addAll(baseData.getResults());
             //num.setText("Q : 1 ");
             ///ques.setText(mQuestions.get(0).getQuestion());
@@ -230,8 +231,14 @@ public class QuizView extends Fragment implements ServiceCallBack {
         int rightScore = trueClick * 1000;
         int falseScore = falseClick * 500;
         int totalScore = rightScore - falseScore;
+        ScoreView mScoreView = new ScoreView();
+        Bundle mBundle = new Bundle();
+        mBundle.putInt("score", totalScore);
+        mScoreView.setArguments(mBundle);
+        ((MainActivity) getActivity()).replaceFragment(R.id.contenair, mScoreView, mScoreView.getClass().getName(), mScoreView.getClass().getName());
         System.out.println("TotalScore>>>>>>" + totalScore);
         System.out.println("rightScore>>>>>>" + rightScore + "falseScore>>>>" + falseScore);
+
 
     }
 

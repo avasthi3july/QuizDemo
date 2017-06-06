@@ -36,6 +36,7 @@ import com.quizflix.dao.Question;
 import com.quizflix.delegates.Api;
 import com.quizflix.delegates.ServiceCallBack;
 import com.quizflix.fragement.QuizView;
+import com.quizflix.fragement.StartQuiz;
 import com.quizflix.webservice.BaseRequest;
 import com.quizflix.webservice.JsonDataParser;
 
@@ -101,8 +102,8 @@ public class MainActivity extends BaseActivity
         inputEmail.setText(emailUser);
         // userName = (TextView) header.findViewById(R.id.name);
         //userEmail = (TextView) header.findViewById(R.id.input_email);
-        QuizView mQuizView = new QuizView();
-        replaceFragment(R.id.contenair, mQuizView, mQuizView.getClass().getName(), mQuizView.getClass().getName());
+        StartQuiz mStartQuiz = new StartQuiz();
+        replaceFragment(R.id.contenair, mStartQuiz, mStartQuiz.getClass().getName(), mStartQuiz.getClass().getName());
     }
 
     @Override
