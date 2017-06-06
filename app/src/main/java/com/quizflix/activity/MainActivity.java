@@ -35,6 +35,7 @@ import com.quizflix.dao.Data;
 import com.quizflix.dao.Question;
 import com.quizflix.delegates.Api;
 import com.quizflix.delegates.ServiceCallBack;
+import com.quizflix.fragement.LeaderBoardView;
 import com.quizflix.fragement.QuizView;
 import com.quizflix.fragement.StartQuiz;
 import com.quizflix.webservice.BaseRequest;
@@ -144,6 +145,9 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
+
+            LeaderBoardView mStartQuiz = new LeaderBoardView();
+            replaceFragment(R.id.contenair, mStartQuiz, mStartQuiz.getClass().getName(), mStartQuiz.getClass().getName());
 
         } else if (id == R.id.logout) {
             SharedPreferences.Editor edit = mSharedPreferences.edit();

@@ -1,6 +1,6 @@
 package com.quizflix.fragement;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -93,10 +93,11 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
             public void onItemClick(View view, int position) {
                 String userId = userListData.get(position).getId();
                 String score = userListData.get(position).getScore();
+                System.out.println("userId"+userId+"score>>>>"+score);
                 try {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("UserId", userId);
-                    jsonObject.put("ChapterId", "1");
+                    //jsonObject.put("ChapterId", "1");
                     jsonObject.put("Score", score);
                     submitScore(jsonObject);
                 } catch (Exception e) {

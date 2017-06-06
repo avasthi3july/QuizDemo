@@ -38,6 +38,8 @@ public class ScoreView extends Fragment implements View.OnClickListener{
     }
 
     private void initViews() {
+        int score = getArguments().getInt("score");
+        totalScore.setText(""+score);
         explanation.setOnClickListener(this);
     }
 
