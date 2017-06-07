@@ -21,6 +21,15 @@ public class Question implements Serializable{
     private String isActive;
     @SerializedName("ChapterId")
     private String chapterId;
+    private boolean userAnswer;
+
+    public boolean isUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(boolean userAnswer) {
+        this.userAnswer = userAnswer;
+    }
 
     public String getQuestionId() {
         return questionId;

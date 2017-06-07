@@ -45,6 +45,8 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
     private String id;
     @BindView(R.id.start_quiz)
     TextView startQuiz;
+    @BindView(R.id.chap_name)
+    TextView chapterName;
     private ArrayList<Question> mQuestions;
     private SharedPreferences mSharedPreferences;
     private MyApplication myApplication;
@@ -104,8 +106,8 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
 
         }
         startQuiz.setOnClickListener(this);
-        if(!myApplication.isAppOpen())
-        Util.showDialog1(getActivity(), "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+        if (!myApplication.isAppOpen())
+            Util.showDialog1(getActivity(), "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
         myApplication.setAppOpen(true);
     }
 
@@ -130,7 +132,9 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
 
 //            userName.setText(name);
             // userEmail.setText(email);
+
             mQuestions.addAll(baseData.getResults());
+            chapterName.setText("Chapter : "+mQuestions.get(0).getChapterId());
             myApplication.setmQuestions(baseData.getResults());
         }
 

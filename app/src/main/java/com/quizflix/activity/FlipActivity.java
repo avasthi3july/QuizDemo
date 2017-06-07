@@ -43,12 +43,13 @@ public class FlipActivity extends AppCompatActivity implements ServiceCallBack {
 
         flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
         updatedata();
+        createView();
         try {
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("Index", "1");
             jsonObject.put("UserId", "6");
-            userRegistration(jsonObject);
+            //userRegistration(jsonObject);
 
             //
         } catch (Exception e) {

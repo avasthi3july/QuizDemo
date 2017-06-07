@@ -22,6 +22,7 @@ import com.quizflix.adapter.QuestionAdapter;
 import com.quizflix.dao.BaseResponse;
 import com.quizflix.dao.Question;
 import com.quizflix.delegates.Api;
+import com.quizflix.delegates.MyApplication;
 import com.quizflix.delegates.ServiceCallBack;
 import com.quizflix.webservice.BaseRequest;
 import com.quizflix.webservice.JsonDataParser;
@@ -51,6 +52,7 @@ public class QuizView extends Fragment {
     MediaPlayer mpRight, mpWorng;
     private Fragment fragment;
     private CountDownTimer mCountDownTimer;
+    private MyApplication myApplication;
 
     @Nullable
     @Override
@@ -66,8 +68,9 @@ public class QuizView extends Fragment {
     }
 
     private void initLayout(View view) {
+        myApplication=(MyApplication)getActivity().getApplicationContext();
         fragment = new QuizView();
-         mCountDownTimer = new CountDownTimer(60000, 1000) {
+         mCountDownTimer = new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timer.setText("Seconds remaining: " + millisUntilFinished / 1000);
@@ -128,6 +131,7 @@ public class QuizView extends Fragment {
                 myAppAdapter.notifyDataSetChanged();
 
                 System.out.println("falseClick" + mQuestion.getQuestion());
+                myApplication.getmQuestions().get(i).setUserAnswer(false);
                 i = ++i;
                 if (mQuestions != null && mQuestions.size() < 1) {
 
@@ -151,6 +155,7 @@ public class QuizView extends Fragment {
                 mQuestions.remove(0);
                 myAppAdapter.notifyDataSetChanged();
                 System.out.println("trueClick" + trueClick);
+                myApplication.getmQuestions().get(i).setUserAnswer(true);
                 i = ++i;
                 if (mQuestions != null && mQuestions.size() < 1) {
 

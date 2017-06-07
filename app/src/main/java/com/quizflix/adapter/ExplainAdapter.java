@@ -38,9 +38,10 @@ public class ExplainAdapter extends Adapter<ExplainAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Question data = adDataArrayList.get(position);
-        holder.question.setText("Question : "+data.getQuestion());
+        holder.question.setText("Question : " + data.getQuestion());
         holder.answer.setText("Answer : " + data.getAnswer());
-        holder.explaination.setText("Exlanation : "+data.getExplanation());
+        holder.explaination.setText("Exlanation : " + data.getExplanation());
+        holder.userAnswer.setText("Your Answer : " + data.isUserAnswer());
 
 
     }
@@ -51,13 +52,14 @@ public class ExplainAdapter extends Adapter<ExplainAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView question, answer, explaination;
+        private TextView question, answer, explaination,userAnswer;
 
         public ViewHolder(View itemView) {
             super(itemView);
             question = (TextView) itemView.findViewById(R.id.ques);
             answer = (TextView) itemView.findViewById(R.id.ans);
             explaination = (TextView) itemView.findViewById(R.id.explain);
+            userAnswer = (TextView) itemView.findViewById(R.id.userAns);
         }
     }
 }

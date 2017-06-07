@@ -58,7 +58,7 @@ public class ScoreView extends Fragment implements View.OnClickListener, Service
         String id = mSharedPreferences.getString("id", null);
         int score = getArguments().getInt("score");
         if (score > 0)
-            totalScore.setText("" + score);
+            totalScore.setText("Your score is - " + score);
         if (score < 4000) {
             message.setText("You Failed!");
         }
