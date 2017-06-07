@@ -2,6 +2,7 @@ package com.quizflix.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
@@ -46,13 +47,14 @@ public class SignupActivity extends AppCompatActivity implements ServiceCallBack
     Button _signupButton;
     @BindView(R.id.link_login)
     TextView _loginLink;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
-
+        mSharedPreferences = Util.getSharedPreferences(this);
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,6 +200,12 @@ public class SignupActivity extends AppCompatActivity implements ServiceCallBack
         }.getType());
         if (baseData.getSuccess()) {
             Util.showToast(this, baseData.getMessage());
+            SharedPreferences.Editor edit = mSharedPreferences.edit();
+            edit.putString("id", baseData.getResult().getId());
+            edit.putString("name", baseData.getResult().getFirstName());
+            edit.putString("email", baseData.getResult().getEmailId());
+            edit.putBoolean("isLogin", false);
+            edit.commit();
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             finish();

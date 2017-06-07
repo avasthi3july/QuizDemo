@@ -9,6 +9,8 @@ import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -38,6 +40,7 @@ import com.quizflix.delegates.ServiceCallBack;
 import com.quizflix.fragement.LeaderBoardView;
 import com.quizflix.fragement.QuizView;
 import com.quizflix.fragement.StartQuiz;
+import com.quizflix.fragement.UserListView;
 import com.quizflix.webservice.BaseRequest;
 import com.quizflix.webservice.JsonDataParser;
 
@@ -75,6 +78,9 @@ public class MainActivity extends BaseActivity
         mSharedPreferences = Util.getSharedPreferences(this);
         emailUser = mSharedPreferences.getString("email", null);
         nameUser = mSharedPreferences.getString("name", null);
+        boolean isLog = mSharedPreferences.getBoolean("isLogin", false);
+        String id = mSharedPreferences.getString("is", null);
+        System.out.println("IDD>>" + id + "is" + isLog);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -98,7 +104,7 @@ public class MainActivity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
-        ButterKnife.bind(this,header);
+        ButterKnife.bind(this, header);
         name.setText(nameUser);
         inputEmail.setText(emailUser);
         // userName = (TextView) header.findViewById(R.id.name);
@@ -134,6 +140,10 @@ public class MainActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
+    LeaderBoardView mLeaderBoardView = new LeaderBoardView();
+    StartQuiz mStartQuiz = new StartQuiz();
+    UserListView mUserListView = new UserListView();
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -141,13 +151,13 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+            replaceFragment(R.id.contenair, mStartQuiz, mStartQuiz.getClass().getName(), mStartQuiz.getClass().getName());
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            replaceFragment(R.id.contenair, mUserListView, mUserListView.getClass().getName(), mUserListView.getClass().getName());
 
         } else if (id == R.id.nav_slideshow) {
-
-            LeaderBoardView mStartQuiz = new LeaderBoardView();
-            replaceFragment(R.id.contenair, mStartQuiz, mStartQuiz.getClass().getName(), mStartQuiz.getClass().getName());
+            replaceFragment(R.id.contenair, mLeaderBoardView, mLeaderBoardView.getClass().getName(), mLeaderBoardView.getClass().getName());
 
         } else if (id == R.id.logout) {
             SharedPreferences.Editor edit = mSharedPreferences.edit();
@@ -177,6 +187,15 @@ public class MainActivity extends BaseActivity
 
     }
 
+    public void clearBackStackInclusive(String tag) {
+        try {
+            getSupportFragmentManager().popBackStack(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void onClick(View v) {/*
         i = ++i;
@@ -186,6 +205,10 @@ public class MainActivity extends BaseActivity
             ques.setText(mQuestions.get(i).getQuestion());
         } else Util.showToast(this, "No More Question");
 */
+    }
+
+    public Fragment currentFragment() {
+        return getSupportFragmentManager().findFragmentById(R.id.contenair);
     }
 
     @Override

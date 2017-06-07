@@ -28,9 +28,10 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-        mTextView=(TextView)findViewById(R.id.timer);
+        mTextView = (TextView) findViewById(R.id.timer);
         mSharedPreferences = Util.getSharedPreferences(this);
         final boolean isLogIn = mSharedPreferences.getBoolean("isLogin", false);
+        System.out.println("ISLOGINN>>>" + mSharedPreferences.getBoolean("isLogin", false));
         new Handler().postDelayed(new Runnable() {
 
 
@@ -38,12 +39,10 @@ public class SplashScreen extends Activity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                if(isLogIn)
-                {
+                if (isLogIn) {
                     Intent i = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(i);
-                }
-                else {
+                } else {
                     Intent i = new Intent(SplashScreen.this, LoginActivity.class);
                     startActivity(i);
                 }

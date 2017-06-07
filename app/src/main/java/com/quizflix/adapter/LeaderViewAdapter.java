@@ -6,13 +6,10 @@ import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.quizflix.R;
-import com.quizflix.dao.Leader;
 import com.quizflix.dao.Result;
-import com.quizflix.dao.User;
 
 import java.util.ArrayList;
 
@@ -20,7 +17,7 @@ import java.util.ArrayList;
  * Created by kavasthi on 2/17/2017.
  */
 
-public class UserAdapter extends Adapter<UserAdapter.ViewHolder> {
+public class LeaderViewAdapter extends Adapter<LeaderViewAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<Result> adDataArrayList;
 
@@ -31,7 +28,7 @@ public class UserAdapter extends Adapter<UserAdapter.ViewHolder> {
 
     }
 
-    public UserAdapter(Context mContext, ArrayList<Result> adData) {
+    public LeaderViewAdapter(Context mContext, ArrayList<Result> adData) {
         this.mContext = mContext;
         this.adDataArrayList = adData;
     }
@@ -39,9 +36,11 @@ public class UserAdapter extends Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        if (position < 10) {
             Result data = adDataArrayList.get(position);
             holder.name.setText(data.getFirstName());
-            //holder.totalScore.setText(data.getScore());
+            holder.totalScore.setText(data.getScore());
+        }
 
 
     }

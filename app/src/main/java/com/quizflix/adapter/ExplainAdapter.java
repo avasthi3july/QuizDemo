@@ -6,13 +6,11 @@ import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.quizflix.R;
-import com.quizflix.dao.Leader;
+import com.quizflix.dao.Question;
 import com.quizflix.dao.Result;
-import com.quizflix.dao.User;
 
 import java.util.ArrayList;
 
@@ -20,18 +18,18 @@ import java.util.ArrayList;
  * Created by kavasthi on 2/17/2017.
  */
 
-public class UserAdapter extends Adapter<UserAdapter.ViewHolder> {
+public class ExplainAdapter extends Adapter<ExplainAdapter.ViewHolder> {
     private Context mContext;
-    private ArrayList<Result> adDataArrayList;
+    private ArrayList<Question> adDataArrayList;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.explain, parent, false);
         return new ViewHolder(view);
 
     }
 
-    public UserAdapter(Context mContext, ArrayList<Result> adData) {
+    public ExplainAdapter(Context mContext, ArrayList<Question> adData) {
         this.mContext = mContext;
         this.adDataArrayList = adData;
     }
@@ -39,9 +37,10 @@ public class UserAdapter extends Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-            Result data = adDataArrayList.get(position);
-            holder.name.setText(data.getFirstName());
-            //holder.totalScore.setText(data.getScore());
+        Question data = adDataArrayList.get(position);
+        holder.question.setText("Question : "+data.getQuestion());
+        holder.answer.setText("Answer : " + data.getAnswer());
+        holder.explaination.setText("Exlanation : "+data.getExplanation());
 
 
     }
@@ -52,12 +51,13 @@ public class UserAdapter extends Adapter<UserAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView name, totalScore;
+        private TextView question, answer, explaination;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name);
-            totalScore = (TextView) itemView.findViewById(R.id.total_score);
+            question = (TextView) itemView.findViewById(R.id.ques);
+            answer = (TextView) itemView.findViewById(R.id.ans);
+            explaination = (TextView) itemView.findViewById(R.id.explain);
         }
     }
 }

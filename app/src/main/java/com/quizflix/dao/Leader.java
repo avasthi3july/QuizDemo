@@ -13,6 +13,8 @@ public class Leader {
     private ArrayList<Result> results;
     @SerializedName("Success")
     private boolean success;
+    @SerializedName("Message")
+    private String message;
 
     public ArrayList<Result> getResults() {
         return results;
@@ -28,5 +30,18 @@ public class Leader {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

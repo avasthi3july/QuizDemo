@@ -2,11 +2,13 @@ package com.quizflix.dao;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by kavasthi on 6/1/2017.
  */
 
-public class Question {
+public class Question implements Serializable{
     @SerializedName("QuestionId")
     private String questionId;
     @SerializedName("Question")
@@ -17,6 +19,8 @@ public class Question {
     private boolean answer;
     @SerializedName("IsActive")
     private String isActive;
+    @SerializedName("ChapterId")
+    private String chapterId;
 
     public String getQuestionId() {
         return questionId;
@@ -56,5 +60,17 @@ public class Question {
 
     public void setIsActive(String isActive) {
         this.isActive = isActive;
+    }
+
+    public boolean isAnswer() {
+        return answer;
+    }
+
+    public String getChapterId() {
+        return chapterId;
+    }
+
+    public void setChapterId(String chapterId) {
+        this.chapterId = chapterId;
     }
 }

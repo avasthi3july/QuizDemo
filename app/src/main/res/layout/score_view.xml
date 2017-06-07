@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/meg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/total_score"
@@ -23,7 +24,7 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Earned ponits"
+        android:text="0"
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textSize="23dp"

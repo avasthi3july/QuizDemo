@@ -1,8 +1,8 @@
 package com.quizflix.fragement;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,14 +12,12 @@ import android.view.ViewGroup;
 
 import com.google.gson.reflect.TypeToken;
 import com.quizflix.R;
-import com.quizflix.adapter.LeaderViewAdapter;
+import com.quizflix.adapter.ExplainAdapter;
 import com.quizflix.adapter.UserAdapter;
-import com.quizflix.dao.BaseResponse;
 import com.quizflix.dao.Leader;
 import com.quizflix.dao.Result;
 import com.quizflix.delegates.Api;
-import com.quizflix.delegates.RecyclerItemClickListener;
-import com.quizflix.delegates.ServerApi;
+import com.quizflix.delegates.MyApplication;
 import com.quizflix.delegates.ServiceCallBack;
 import com.quizflix.webservice.BaseRequest;
 import com.quizflix.webservice.JsonDataParser;
@@ -32,12 +30,13 @@ import retrofit.RetrofitError;
 import retrofit.mime.TypedByteArray;
 
 /**
- * Created by kavasthi on 6/6/2017.
+ * Created by kavasthi on 6/7/2017.
  */
 
-public class LeaderBoardView extends Fragment implements ServiceCallBack {
+public class ExplainationView extends Fragment {
     private ArrayList<Result> userListData;
     private RecyclerView mRecyclerView;
+    private MyApplication myApplication;
 
     @Nullable
     @Override
@@ -51,7 +50,7 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
         initViews(view);
     }
 
-    public void getUserList() {
+   /* public void getUserList() {
         BaseRequest baseRequest = new BaseRequest(getActivity());
         baseRequest.setProgressShow(true);
         baseRequest.setRequestTag(Api.ADD_USER_REGISTRATION);
@@ -64,18 +63,32 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-
+    /*public void submitScore(JSONObject jsonObject) {
+        BaseRequest baseRequest = new BaseRequest(getActivity());
+        baseRequest.setProgressShow(true);
+        baseRequest.setRequestTag(Api.ADD_SCORE);
+        baseRequest.setMessage("Please wait...");
+        baseRequest.setServiceCallBack(ge);
+        Api api = (Api) baseRequest.execute(Api.class);
+        try {
+            TypedByteArray input = new TypedByteArray("application/json", jsonObject.toString().getBytes("UTF-8"));
+            api.getUserInsert(input, baseRequest.requestCallback());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 
     private void initViews(View view) {
-        getUserList();
+        myApplication = (MyApplication) getActivity().getApplicationContext();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         LinearLayoutManager ll = new LinearLayoutManager(getActivity());
         ll.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(ll);
-
+        ExplainAdapter mExplainAdapter = new ExplainAdapter(getActivity(), myApplication.getmQuestions());
+        mRecyclerView.setAdapter(mExplainAdapter);
       /*  mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -97,31 +110,6 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
         }));*/
     }
 
-    @Override
-    public void onSuccess(int tag, String baseResponse) {
-        if (tag == Api.ADD_USER_REGISTRATION) {
-            Leader baseData = JsonDataParser.getInternalParser(baseResponse, new TypeToken<Leader>() {
-            }.getType());
-            userListData = new ArrayList<>();
-            if (baseData.getSuccess()) {
-                for (int i = 0; i < 10; i++) {
-                    userListData.add(baseData.getResults().get(i));
-                }
-                LeaderViewAdapter mLeaderViewAdapter = new LeaderViewAdapter(getActivity(), userListData);
-                mRecyclerView.setAdapter(mLeaderViewAdapter);
-            }
-        } else if (tag == Api.ADD_SCORE) {
 
-        }
-    }
-
-    @Override
-    public void onFail(RetrofitError error) {
-
-    }
-
-    @Override
-    public void onNoNetwork() {
-
-    }
 }
+
