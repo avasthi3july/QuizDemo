@@ -107,7 +107,10 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
         }
         startQuiz.setOnClickListener(this);
         if (!myApplication.isAppOpen())
-            Util.showDialog1(getActivity(), "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+            Util.showDialog1(getActivity(), "For Answering questions, Swipe right for true, Swipe left for false.\n" +
+                    "For every correct Answer you will get +1000 points and for every incorrect Answer you will be deducted -500 points.\n" +
+                    "At the end of quiz you will see your total earned score for that chapter.\n" +
+                    "Clicking explanation button at score screen, will show explanation about question, correct answer for questions and your given answer.");
         myApplication.setAppOpen(true);
     }
 
