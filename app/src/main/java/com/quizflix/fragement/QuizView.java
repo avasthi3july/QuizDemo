@@ -47,7 +47,9 @@ public class QuizView extends Fragment {
     private ArrayList<Question> mQuestions;
     @BindView(R.id.timer)
     TextView timer;
-    int i = 0, quesNum = 1, trueClick = 0, falseClick = 0;
+    @BindView(R.id.total_score)
+    TextView totalScore;
+    int i = 0, quesNum = 1, trueClick = 0, falseClick = 0, score = 0;
     public QuestionAdapter myAppAdapter;
     MediaPlayer mpRight, mpWorng;
     private Fragment fragment;
@@ -68,9 +70,9 @@ public class QuizView extends Fragment {
     }
 
     private void initLayout(View view) {
-        myApplication=(MyApplication)getActivity().getApplicationContext();
+        myApplication = (MyApplication) getActivity().getApplicationContext();
         fragment = new QuizView();
-         mCountDownTimer = new CountDownTimer(120000, 1000) {
+        mCountDownTimer = new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timer.setText("Seconds remaining: " + millisUntilFinished / 1000);
@@ -121,15 +123,17 @@ public class QuizView extends Fragment {
                 Question mQuestion = mQuestions.get(0);
                 if (!mQuestion.getAnswer()) {
                     trueClick = ++trueClick;
+                    score = score + 1000;
                     mpRight.start();
 
                 } else {
                     falseClick = ++falseClick;
+                    score = score - 500;
                     mpWorng.start();
                 }
                 mQuestions.remove(0);
                 myAppAdapter.notifyDataSetChanged();
-
+                totalScore.setText(""+score);
                 System.out.println("falseClick" + mQuestion.getQuestion());
                 myApplication.getmQuestions().get(i).setUserAnswer(false);
                 i = ++i;
@@ -146,12 +150,14 @@ public class QuizView extends Fragment {
 
                 if (mQuestion.getAnswer()) {
                     trueClick = ++trueClick;
+                    score = score + 1000;
                     mpRight.start();
                 } else {
                     falseClick = ++falseClick;
+                    score = score - 500;
                     mpWorng.start();
                 }
-
+                totalScore.setText(""+score);
                 mQuestions.remove(0);
                 myAppAdapter.notifyDataSetChanged();
                 System.out.println("trueClick" + trueClick);
@@ -196,8 +202,9 @@ public class QuizView extends Fragment {
 
 
     private void totalScore() {
+        System.out.println("scoree>>>>>" + score);
         mCountDownTimer.cancel();
-        int rightScore = trueClick * 1000;
+       int rightScore = trueClick * 1000;
         int falseScore = falseClick * 500;
         int totalScore = rightScore - falseScore;
 
