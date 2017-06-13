@@ -40,6 +40,8 @@ public class LeaderViewAdapter extends Adapter<LeaderViewAdapter.ViewHolder> {
             Result data = adDataArrayList.get(position);
             holder.name.setText(data.getFirstName());
             holder.totalScore.setText(data.getScore());
+            int pos=position+1;
+            holder.position.setText("" + pos);
         }
 
 
@@ -51,12 +53,13 @@ public class LeaderViewAdapter extends Adapter<LeaderViewAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView name, totalScore;
+        private TextView name, totalScore, position;
 
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
             totalScore = (TextView) itemView.findViewById(R.id.total_score);
+            position = (TextView) itemView.findViewById(R.id.pos);
         }
     }
 }

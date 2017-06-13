@@ -36,6 +36,7 @@ import com.quizflix.dao.BaseResponse;
 import com.quizflix.dao.Data;
 import com.quizflix.dao.Question;
 import com.quizflix.delegates.Api;
+import com.quizflix.delegates.Header;
 import com.quizflix.delegates.ServiceCallBack;
 import com.quizflix.fragement.LeaderBoardView;
 import com.quizflix.fragement.QuizView;
@@ -54,7 +55,7 @@ import retrofit.RetrofitError;
 import retrofit.mime.TypedByteArray;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ServiceCallBack, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ServiceCallBack, View.OnClickListener, Header {
     private SharedPreferences mSharedPreferences;
     private TextView userName, userEmail;
     private String nameUser, emailUser;
@@ -62,6 +63,9 @@ public class MainActivity extends BaseActivity
     TextView name;
     @BindView(R.id.input_email)
     TextView inputEmail;
+    /*@BindView(R.id.toolbar_title)
+    TextView toolbarTitle;*/
+    TextView headerName;
 
     @Override
     protected int getView() {
@@ -107,6 +111,8 @@ public class MainActivity extends BaseActivity
         ButterKnife.bind(this, header);
         name.setText(nameUser);
         inputEmail.setText(emailUser);
+
+        headerName = (TextView) findViewById(R.id.toolbar_title);
         // userName = (TextView) header.findViewById(R.id.name);
         //userEmail = (TextView) header.findViewById(R.id.input_email);
         StartQuiz mStartQuiz = new StartQuiz();
@@ -217,5 +223,11 @@ public class MainActivity extends BaseActivity
 
         }
         return false;
+    }
+
+    @Override
+    public void setHeader(String name) {
+        headerName.setText(name);
+
     }
 }

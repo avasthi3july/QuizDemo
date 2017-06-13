@@ -2,12 +2,16 @@ package com.quizflix.fragement;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -48,6 +52,7 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
     @BindView(R.id.chap_name)
     TextView chapterName;
     private ArrayList<Question> mQuestions;
+    private Button dismiss;
     private SharedPreferences mSharedPreferences;
     private MyApplication myApplication;
 
@@ -62,15 +67,19 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         initViews(view);
+
     }
 
     private void openDialog() {
         try {
             dialog = new Dialog(getActivity());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.intro_layout);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             // set the custom dialog components - text, image and button
             introText = (TextView) dialog.findViewById(R.id.intro_text);
-
+            dismiss = (Button) dialog.findViewById(R.id.dismiss);
+            dismiss.setOnClickListener(this);
             dialog.show();
 
         } catch (Exception e) {
@@ -94,6 +103,7 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
     }
 
     private void initViews(View view) {
+        ((MainActivity) getActivity()).setHeader("Play Quiz");
         myApplication = (MyApplication) getActivity().getApplicationContext();
         mSharedPreferences = Util.getSharedPreferences(getActivity());
         id = mSharedPreferences.getString("id", null);
@@ -106,12 +116,13 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
 
         }
         startQuiz.setOnClickListener(this);
-        if (!myApplication.isAppOpen())
+        /*if (!myApplication.isAppOpen())
             Util.showDialog1(getActivity(), "For Answering questions, Swipe right for true, Swipe left for false.\n" +
                     "For every correct Answer you will get +1000 points and for every incorrect Answer you will be deducted -500 points.\n" +
                     "At the end of quiz you will see your total earned score for that chapter.\n" +
                     "Clicking explanation button at score screen, will show explanation about question, correct answer for questions and your given answer.");
-        myApplication.setAppOpen(true);
+        myApplication.setAppOpen(true);*/
+
     }
 
     @Override
@@ -122,7 +133,8 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
             mBundle.putSerializable("dataList", mQuestions);
             mQuizView.setArguments(mBundle);
             ((MainActivity) getActivity()).replaceFragment(R.id.contenair, mQuizView, mQuizView.getClass().getName(), mQuizView.getClass().getName());
-        }
+        } else if (v == dismiss)
+            dialog.dismiss();
 
     }
 
@@ -131,13 +143,16 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
         mQuestions = new ArrayList<>();
         BaseResponse baseData = JsonDataParser.getInternalParser(baseResponse, new TypeToken<BaseResponse>() {
         }.getType());
+        if (!myApplication.isAppOpen())
+            openDialog();
+        myApplication.setAppOpen(true);
         if (baseData.getSuccess()) {
 
 //            userName.setText(name);
             // userEmail.setText(email);
 
             mQuestions.addAll(baseData.getResults());
-            chapterName.setText("Chapter : "+mQuestions.get(0).getChapterId());
+            chapterName.setText("Chapter : " + mQuestions.get(0).getChapterId());
             myApplication.setmQuestions(baseData.getResults());
         }
 

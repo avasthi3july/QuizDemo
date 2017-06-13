@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 
 import com.google.gson.reflect.TypeToken;
 import com.quizflix.R;
+import com.quizflix.activity.MainActivity;
 import com.quizflix.adapter.LeaderViewAdapter;
 import com.quizflix.adapter.UserAdapter;
 import com.quizflix.dao.BaseResponse;
 import com.quizflix.dao.Leader;
 import com.quizflix.dao.Result;
 import com.quizflix.delegates.Api;
+import com.quizflix.delegates.Header;
 import com.quizflix.delegates.RecyclerItemClickListener;
 import com.quizflix.delegates.ServerApi;
 import com.quizflix.delegates.ServiceCallBack;
@@ -69,6 +71,7 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
 
 
     private void initViews(View view) {
+        ((MainActivity)getActivity()).setHeader("LeaderBoard");
         getUserList();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         LinearLayoutManager ll = new LinearLayoutManager(getActivity());
@@ -124,4 +127,6 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
     public void onNoNetwork() {
 
     }
+
+
 }

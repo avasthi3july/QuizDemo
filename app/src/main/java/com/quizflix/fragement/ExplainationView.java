@@ -18,6 +18,7 @@ import com.quizflix.dao.Leader;
 import com.quizflix.dao.Result;
 import com.quizflix.delegates.Api;
 import com.quizflix.delegates.MyApplication;
+import com.quizflix.delegates.RecyclerItemClickListener;
 import com.quizflix.delegates.ServiceCallBack;
 import com.quizflix.webservice.BaseRequest;
 import com.quizflix.webservice.JsonDataParser;
@@ -89,10 +90,10 @@ public class ExplainationView extends Fragment {
         mRecyclerView.setLayoutManager(ll);
         ExplainAdapter mExplainAdapter = new ExplainAdapter(getActivity(), myApplication.getmQuestions());
         mRecyclerView.setAdapter(mExplainAdapter);
-      /*  mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+       mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                String userId = userListData.get(position).getId();
+                /*String userId = userListData.get(position).getId();
                 String score = userListData.get(position).getScore();
                 System.out.println("userId" + userId + "score>>>>" + score);
                 try {
@@ -103,11 +104,11 @@ public class ExplainationView extends Fragment {
                     submitScore(jsonObject);
                 } catch (Exception e) {
 
-                }
+                }*/
 
                 //getAdData(adDataList.get(position).getId());
             }
-        }));*/
+        }));
     }
 
 

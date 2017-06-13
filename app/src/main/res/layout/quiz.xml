@@ -25,7 +25,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="14dp"
         android:gravity="right"
-        android:text="Score 18"
+        android:text="Score 0"
         android:padding="5dp"
         android:textColor="#ffffff"
         android:textSize="17dp"

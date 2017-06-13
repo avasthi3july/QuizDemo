@@ -70,12 +70,13 @@ public class QuizView extends Fragment {
     }
 
     private void initLayout(View view) {
+        ((MainActivity)getActivity()).setHeader("Play Quiz");
         myApplication = (MyApplication) getActivity().getApplicationContext();
         fragment = new QuizView();
         mCountDownTimer = new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                timer.setText("Seconds remaining: " + millisUntilFinished / 1000);
+                timer.setText("" + millisUntilFinished / 1000);
             }
 
             public void onFinish() {

@@ -51,6 +51,9 @@
             <item name="android:textColorPrimary">@color/iron</item>
             <item name="android:background">@color/primary</item>
         </style>-->
-
+    <string name="intro">For Answering questions, Swipe right for true, Swipe left for false For every correct Answer you will get +1000 points and for every incorrect Answer you will be deducted -500 points.
+                    At the end of quiz you will see your total earned score for that chapter.
+                    Clicking explanation button at score screen, will show explanation about question, correct answer for questions and your given answer.
+       </string>
 
 </resources>

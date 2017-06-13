@@ -22,6 +22,15 @@ public class Question implements Serializable{
     @SerializedName("ChapterId")
     private String chapterId;
     private boolean userAnswer;
+    private boolean selected;
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public boolean isUserAnswer() {
         return userAnswer;
