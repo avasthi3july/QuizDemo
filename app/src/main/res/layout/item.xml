@@ -59,7 +59,7 @@
                 <ImageView
                     android:id="@+id/cardImage"
                     android:layout_width="300dp"
-                    android:layout_height="70dp"
+                    android:layout_height="10dp"
                     android:padding="4dp"
                     android:scaleType="centerCrop" />
 
@@ -82,7 +82,7 @@
                             android:gravity="left"
                             android:padding="4dp"
                             android:textColor="#787878"
-                            android:textSize="32sp"
+                            android:textSize="46sp"
                             android:textStyle="bold"
                             tools:text="" />
                    <!-- </ScrollView>-->

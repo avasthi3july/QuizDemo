@@ -3,6 +3,7 @@ package com.quizflix.fragement;
 import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -79,6 +80,8 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
             // set the custom dialog components - text, image and button
             introText = (TextView) dialog.findViewById(R.id.intro_text);
             dismiss = (Button) dialog.findViewById(R.id.dismiss);
+            Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/intro.otf");
+            introText.setTypeface(type);
             dismiss.setOnClickListener(this);
             dialog.show();
 
