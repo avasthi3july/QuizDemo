@@ -1,14 +1,19 @@
 package com.quizflix.fragement;
 
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.google.gson.reflect.TypeToken;
 import com.quizflix.R;
@@ -40,6 +45,8 @@ import retrofit.mime.TypedByteArray;
 public class LeaderBoardView extends Fragment implements ServiceCallBack {
     private ArrayList<Result> userListData;
     private RecyclerView mRecyclerView;
+    private RelativeLayout topLayout;
+    private LinearLayout parentlay;
 
     @Nullable
     @Override
@@ -69,11 +76,17 @@ public class LeaderBoardView extends Fragment implements ServiceCallBack {
     }
 
 
-
     private void initViews(View view) {
-        ((MainActivity)getActivity()).setHeader("LeaderBoard");
+        ((MainActivity) getActivity()).setHeader("LeaderBoard");
         getUserList();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        topLayout = (RelativeLayout) view.findViewById(R.id.top_layout);
+        parentlay = (LinearLayout) view.findViewById(R.id.parent_lay);
+        parentlay.setBackgroundResource(R.color.icons);
+        DividerItemDecoration divider = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        divider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.divider));
+        mRecyclerView.addItemDecoration(divider);
+        topLayout.setVisibility(View.VISIBLE);
         LinearLayoutManager ll = new LinearLayoutManager(getActivity());
         ll.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

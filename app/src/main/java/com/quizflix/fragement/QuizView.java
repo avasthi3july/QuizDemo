@@ -69,11 +69,19 @@ public class QuizView extends Fragment {
         initLayout(view);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mCountDownTimer.cancel();
+    }
+
+
+
     private void initLayout(View view) {
         ((MainActivity)getActivity()).setHeader("Play Quiz");
         myApplication = (MyApplication) getActivity().getApplicationContext();
         fragment = new QuizView();
-        mCountDownTimer = new CountDownTimer(120000, 1000) {
+        mCountDownTimer = new CountDownTimer(121000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timer.setText("" + millisUntilFinished / 1000);

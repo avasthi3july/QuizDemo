@@ -10,13 +10,13 @@
 
     <TextView
         android:id="@+id/pos"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:text="1"
         android:textStyle="bold"
-        android:textColor="#2873ff"
+        android:textColor="#A9A9A9"
         android:textSize="18dp" />
 
     <TextView
@@ -24,11 +24,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="12dp"
         android:layout_toRightOf="@+id/pos"
+        android:inputType="textCapWords"
         android:text="kusumkar avasthi"
         android:textStyle="bold"
-        android:textColor="#2873ff"
+        android:textColor="#000000"
         android:textSize="18dp" />
 
     <TextView
@@ -37,10 +37,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="2dp"
         android:textStyle="bold"
         android:text="18000"
-        android:textColor="#2873ff"
+        android:textColor="#A9A9A9"
         android:textSize="18dp" />
 
 </RelativeLayout>

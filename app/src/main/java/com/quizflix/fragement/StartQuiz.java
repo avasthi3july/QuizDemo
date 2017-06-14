@@ -45,7 +45,7 @@ import retrofit.mime.TypedByteArray;
  */
 
 public class StartQuiz extends Fragment implements View.OnClickListener, ServiceCallBack {
-    private TextView introText;
+    private TextView introText1,introText2,introText3,introText4;
     private Dialog dialog;
     private String id;
     @BindView(R.id.start_quiz)
@@ -76,12 +76,19 @@ public class StartQuiz extends Fragment implements View.OnClickListener, Service
             dialog = new Dialog(getActivity());
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.intro_layout);
+            dialog.setCancelable(false);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             // set the custom dialog components - text, image and button
-            introText = (TextView) dialog.findViewById(R.id.intro_text);
+            introText1 = (TextView) dialog.findViewById(R.id.intro_text1);
+            introText2 = (TextView) dialog.findViewById(R.id.intro_text2);
+            introText3 = (TextView) dialog.findViewById(R.id.intro_text3);
+            introText4 = (TextView) dialog.findViewById(R.id.intro_text4);
             dismiss = (Button) dialog.findViewById(R.id.dismiss);
-            Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/intro.otf");
-            introText.setTypeface(type);
+            Typeface type = Typeface.createFromAsset(getActivity().getAssets(), "fonts/intro.otf");
+            introText1.setTypeface(type);
+            introText2.setTypeface(type);
+            introText3.setTypeface(type);
+            introText4.setTypeface(type);
             dismiss.setOnClickListener(this);
             dialog.show();
 

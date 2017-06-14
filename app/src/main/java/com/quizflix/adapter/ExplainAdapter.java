@@ -3,6 +3,7 @@ package com.quizflix.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class ExplainAdapter extends Adapter<ExplainAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<Question> adDataArrayList;
-    private int cons = 0;
+    private int lastPos = 0;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,15 +44,19 @@ public class ExplainAdapter extends Adapter<ExplainAdapter.ViewHolder> {
 
         final Question data = adDataArrayList.get(position);
         //adDataArrayList.get(position).setSelected(true);
-        holder.question.setText("Question : " + data.getQuestion());
-        holder.answer.setText("Answer : " + data.getAnswer());
-        holder.explaination.setText("Exlanation : " + data.getExplanation());
+        holder.question.setText(Html.fromHtml("<b>" + "Question : " + "</b>" + data.getQuestion()));
+        holder.explaination.setText(Html.fromHtml("<b>" + "Exlanation : " + "</b>" + data.getExplanation()));
+        // holder.question.setText("Question : " + data.getQuestion());
+        //holder.answer.setText("Answer : " + data.getAnswer());
+        // holder.explaination.setText("Exlanation : " + data.getExplanation());
         holder.mRelativeLayout.setTag(position);
-        holder.userAnswer.setText("Your Answer : " + data.isUserAnswer());
+        //holder.userAnswer.setText("Your Answer : " + data.isUserAnswer());
         if (adDataArrayList.get(position).isSelected()) {
             holder.explaination.setVisibility(View.VISIBLE);
+            holder.divider.setVisibility(View.VISIBLE);
         } else {
             holder.explaination.setVisibility(View.GONE);
+            holder.divider.setVisibility(View.GONE);
         }
         if ((data.isAnswer() && data.isUserAnswer()) || (!data.isAnswer() && !data.isUserAnswer()))
             holder.icon.setImageResource(R.drawable.checked);
@@ -60,9 +65,11 @@ public class ExplainAdapter extends Adapter<ExplainAdapter.ViewHolder> {
         holder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (lastPos != position) {
 
-                for (Question item : adDataArrayList) {
-                    item.setSelected(false);
+                    for (Question item : adDataArrayList) {
+                        item.setSelected(false);
+                    }
                 }
 
                 if (adDataArrayList.get(position).isSelected()) {
@@ -70,7 +77,7 @@ public class ExplainAdapter extends Adapter<ExplainAdapter.ViewHolder> {
                 } else {
                     adDataArrayList.get(position).setSelected(true);
                 }
-
+                lastPos = position;
                 notifyDataSetChanged();
 
             }
@@ -88,6 +95,7 @@ public class ExplainAdapter extends Adapter<ExplainAdapter.ViewHolder> {
         private TextView question, answer, explaination, userAnswer;
         private RelativeLayout mRelativeLayout;
         private ImageView icon;
+        private View divider;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -96,6 +104,7 @@ public class ExplainAdapter extends Adapter<ExplainAdapter.ViewHolder> {
             explaination = (TextView) itemView.findViewById(R.id.explain);
             userAnswer = (TextView) itemView.findViewById(R.id.userAns);
             icon = (ImageView) itemView.findViewById(R.id.iconc);
+            divider = (View) itemView.findViewById(R.id.divider);
             mRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.main_view);
         }
     }
